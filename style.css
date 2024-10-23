@@ -1,0 +1,206 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow-x: hidden; /* Impede a barra de rolagem horizontal */
+  }
+  
+  
+  /* Fundo verde para toda a página */
+  .green-background {
+    background-color: #2d9259;
+    min-height: 100vh;
+    color: white;
+    padding: 0;
+    position: relative;
+  }
+  
+  .background-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: auto;
+    margin-left: 200px;
+    margin-top: 60px;
+    z-index: 1;
+  }
+  
+  /* Estilo das imagens traçado */
+  .tracado1-img {
+    position: absolute;
+    left: 155px;
+    width: 200px;
+    height: auto;
+    z-index: 0;
+    bottom: -89px;
+  }
+  
+  .tracado2-img {
+    position: absolute;
+    top: 433px;
+    left: -12px;
+    width: 400px;
+    height: auto;
+    z-index: 0;
+    right: 10px;
+    transform: rotate(-3deg);
+  }
+  
+  /* Estilo das seções */
+  .section-1, .section-2, .section-3 {
+    padding: 50px 0;
+    position: relative;
+  }
+  
+  /* Estilo para os botões e formulários */
+  form .btn {
+    margin-top: 20px;
+  }
+  
+  .video-player { 
+     width: 100%;
+     max-width: 100%; /* Ajuste conforme necessário */
+     margin-right: 20px; /* Margem à direita para espaçamento */
+    /* height: auto; */
+  }
+  .logo-over-video {
+     position: absolute;
+     top: 10px; /* Ajuste a posição conforme necessário */
+     right: 10px; /* Posiciona o logo no canto superior direito do vídeo */
+     max-width: 150px; /* Tamanho do logo */
+     z-index: 10; /* Garante que o logo fique sobre o vídeo */
+  }
+  
+  .description {
+     margin-top: 20px; /* Espaço entre o vídeo e a descrição */
+  }
+  
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+  .h1Popipe{
+    color: yellow;
+    font-family: serif;
+    text-align: -webkit-center;
+  }
+  .section2Text{
+    text-align: center;
+    font-family: cursive;
+  }
+  .text-center{
+    font-size: -webkit-xxx-large; 
+    color: #2d9259;
+    font-family: fantasy;
+  }
+  .logo-popipe-img{
+    width: 192px;
+  }
+  
+  @media (max-width: 780px) { /*769*/
+    .background-img {
+      position: relative;
+      height: auto; /* Mantém a proporção */
+      margin-top: 20px; /* Ajusta o espaçamento no topo */
+    }
+  
+    .tracado1-img
+    {
+      width: 300px;
+      transform: rotate(-2deg);
+      bottom: 30pc;
+      left: -1pc;
+    }
+  
+    .tracado2-img {
+        transform: rotate(-8deg);
+        width: 492px;
+        left: -6pc;
+        top: 33pc;
+    }
+  
+    .video-player {
+      width: 100%;    /* O vídeo ocupará 100% da largura da tela */
+      max-width: 100%; /* Garante que o vídeo não ultrapasse a largura */
+      height: auto;   /* Mantém a proporção da altura */
+    }
+  
+    .description {
+      margin-top: 10px; /* Menor margem para telas pequenas */
+      text-align: center; /* Centraliza o conteúdo */
+    }
+  }
+  
+  @media (max-width: 425px) {
+    .background-img {
+      height: auto;
+      margin-left: 79px;
+      margin-top: 35px; 
+    }
+  
+    .tracado1-img {
+      width: 76%;
+      left: -19%;
+      top: -119px;
+      transform: rotate(0deg);
+    }
+  
+    .tracado2-img {
+      width: 106%;
+      left: -30%;
+      bottom: -53px;
+      transform: rotate(-19deg);
+    }
+  
+  }
+  @media (min-width: 1000px) { /**1040*/
+    .tracado2-img {
+      position: absolute;
+      top: 622px;
+      left: -518px;
+      width: 917px;
+      height: auto;
+      z-index: 0;
+      right: 10px;
+      transform: rotate(-3deg);
+    }
+    .text-end{
+      padding-right: 100px;
+    }
+    .tracado2-img {
+      position: absolute;
+      top: 693px;
+      left: -585px;
+      width: 943px;
+      height: auto;
+      z-index: 0;
+      right: 10px;
+      transform: rotate(-3deg);
+    }
+    .tracado1-img {
+      position: absolute;
+      left: -102px;
+      width: 423px;
+      height: auto;
+      z-index: 0;
+      top: -105px;
+    }
+  
+    .background-img {
+      position: absolute;
+      top: 153px;
+      left: 0;
+      width: 217px;
+      height: auto;
+      margin-left: 200px;
+      margin-top: 60px;
+      z-index: 1;
+    }
+  
+  }
+  
+  
+  
+          
+  

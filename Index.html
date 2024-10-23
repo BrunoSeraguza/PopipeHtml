@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ExpoCannabis</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <div class="container-fluid green-background">
+        <!-- PNG  -->
+        <div style="position: relative;">
+            <img src="Assets/PERSONAGEM.png" class="background-img" />
+
+            <!-- Imagens adicionais -->
+            <img src="Assets/tracado1.png" class="tracado1-img" alt="Traçado 1" />
+            <img src="Assets/tracado2.png" class="tracado2-img" alt="Traçado 2" />
+        </div>
+
+        <!-- Primeira Seção: Vídeo e Descrições -->
+        <section class="row section-1 align-items-center">
+            <div class="col-md-6">
+            </div>
+            <div class="col-md-6 description">
+                <div class="text-end">
+                    <img src="Assets/logopopipe.png" class="logopopipe-img" alt="logopopipe" />
+                    <img src="Assets/SELOCAMPANHA.png" class="seloCampanha" alt="selocampanha" />
+                    <video controls class="video-player">
+                        <source src="videos/exemplo.mp4" type="video/mp4" />
+                        Seu navegador não suporta o elemento de vídeo.
+                    </video>
+                    <h1 class="h1Popipe">A Popipe existe desde quando era só mato!</h1>
+                    <p class="section2Text">Desde 2009 a popipe lança e acompanha as maiores tendências para headshops
+                        do Brasil!
+                        Vivemos todas as transformações do mercado e vivemos histórias incríveis ajudando a
+                        construir um cenário de respeito para todos os maconheiros, que assim como nós mantiveram o
+                        respeito. </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Segunda Seção: Propaganda -->
+        <div style="border: 2px solid black; background-color: #92e37c;">
+            <section class="row section-2 align-items-center justify-content-center">
+                <div class="col-md-8 text-center">
+                    <h2>Grave seu video para capsula do tempo Popipe e concorra:</h2>
+                    <img src="Assets/" alt="Imagem" />
+                </div>
+            </section>
+        </div>
+        
+        <!-- Terceira Seção: Formulário e Gravação de Vídeo -->
+        <div style="border: 2px solid black;">
+            <section class="row section-3">
+                <!-- Coluna para as imagens à esquerda -->
+                <div class="col-md-6">
+                    <div class="d-flex align-items-start">
+                        <img src="Assets/SITE01.png" alt="Imagem 3" class="img-fluid mr-3"
+                            style="width: 20%; max-width: 150px;" />
+                        <div>
+                            <h3 class="mb-0" style="color: yellow; font-family: serif;">Capsula do tempo Popipe</h3>
+                            <p class="mb-3">Agora, quinte anos após o nascimento da marca convidamos <br>
+                                você a levar sua<br>
+                                mensagem para o futuro.<br>
+                                Seja uma história, uma música, verso, poema,<br>
+                                da a letra e grava o video!
+                            </p>
+                            <h3 class="" style="color: yellow; font-family: serif;">Grave seu video<br>
+                                envie sua mensagem para o futuro<br>
+                                e concorra a prêmios!
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Coluna para o formulário à direita -->
+                <div class="col-md-6 text-center" style="border-left: 2px solid black;">
+                    <form id="video-form" class="w-75 mx-auto">
+                        <div class="mb-3">
+                            <input placeholder="Nome" type="text" class="form-control" id="name" required />
+                        </div>
+                        <div class="mb-3">
+                            <input placeholder="Email" type="email" class="form-control" id="email" required />
+                        </div>
+                        <div class="mb-3">
+                            <input placeholder="Telefone" type="tel" class="form-control" id="phone" required />
+                        </div>
+                        <div class="mb-3">
+                            <textarea placeholder="Escreva sua mensagem!" id="message" class="form-control" rows="3"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <button type="button" class="btn btn-primary" id="record-video-btn">Gravar Vídeo</button>
+                            <button type="button" class="btn btn-danger d-none" id="stop-video-btn">Parar Gravação</button>
+                            <video id="video-preview" controls autoplay style="display:none; width: 100%; height: auto;"></video>
+                        </div>
+                        <div class="mb-3">
+                            <button type="submit" id="btn-enviar" class="btn btn-success">Enviar</button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+        </div>
+
+        <div class="container">
+            <main role="main" class="pb-3">
+                <!-- Conteúdo principal aqui -->
+            </main>
+        </div>
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+        <script src="https://accounts.google.com/gsi/client" async defer></script>
+
+        <script src="script.js"></script>
+    </div>
+</body>
+
+</html>
