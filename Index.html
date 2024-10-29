@@ -4,6 +4,9 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Cross-Origin-Opener-Policy" content="same-origin">
+    <meta http-equiv="Cross-Origin-Embedder-Policy" content="require-corp">
+
     <title>ExpoCannabis</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
     <link rel="stylesheet" href="style.css" />
@@ -96,6 +99,8 @@
                             <button type="button" class="btn btn-danger d-none" id="stop-video-btn">Parar Gravação</button>
                             <video id="video-preview" controls autoplay style="display:none; width: 100%; height: auto;"></video>
                         </div>
+                             <!-- Adicione o campo de input do tipo "file" para o vídeo -->
+                        <input type="file" id="videoFile" style="display:none;" accept="video/webm">
                         <div class="mb-3">
                             <button type="submit" id="btn-enviar" class="btn btn-success">Enviar</button>
                         </div>
@@ -109,10 +114,60 @@
                 <!-- Conteúdo principal aqui -->
             </main>
         </div>
+        <div id="g_id_onload" data-client_id="1090299703695-i7hbld4agldb5729p4kpqbu9bjme5p6s.apps.googleusercontent.com" data-callback="handleCredentialResponse"></div>
+        <div class="g_id_signin" data-type="standard"></div>
         
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
         <script src="https://accounts.google.com/gsi/client" async defer></script>
+        <script>
+        function handleCredentialResponse(response) {
+            debugger
+            const idToken = response.credential; // O ID Token retornado
+
+// Trocar o ID Token por um Access Token
+fetch('https://oauth2.googleapis.com/token', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    body: new URLSearchParams({
+        'client_id': '1090299703695-i7hbld4agldb5729p4kpqbu9bjme5p6s.apps.googleusercontent.com',
+        'client_secret': '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',
+        'code': idToken, // ou o código de autorização
+        'grant_type': 'authorization_code',
+        'redirect_uri': 'http://127.0.0.1:5500/Index.html',
+    }),
+})
+.then(response => response.json())
+.then(data => {
+    const accessToken = data.access_token; // O Access Token
+    console.log("Access Token:", accessToken);
+
+    // Agora você pode usar o Access Token para enviar o vídeo
+    // Exemplo:
+    // uploadVideo(accessToken);
+})
+.catch(error => {
+    console.error("Erro ao obter Access Token:", error);
+});
+}
+    </script>
+
+
+
+        <!-- <script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+        </script>
+        <script type="text/javascript">
+            (function(){
+                 emailjs.init({
+                    publicKey: "E5_Df9sER2k4ZrHFG",
+            });
+        })();
+        </script> -->
+
+
 
         <script src="script.js"></script>
     </div>
