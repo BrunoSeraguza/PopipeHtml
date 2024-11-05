@@ -7,10 +7,6 @@ const videoPreview = document.getElementById('video-preview');
 const btnEnviar = document.getElementById('btn-enviar');
 const videoFile = document.getElementById('videoFile');
 
-// function handleClientLoad() {
-//     gapi.load('client:auth2', initClient);
-// }
-
 startRecordButton.addEventListener('click', async () => {
     try {
         recordedChunks = []; // Reinicia os chunks gravados
@@ -55,7 +51,7 @@ startRecordButton.addEventListener('click', async () => {
 
 btnEnviar.addEventListener('click', () => {
     debugger
-    const videoBlob = new Blob(recordedChunks, { type: 'video/webm' });
+    const videoBlob = new Blob(recordedChunks, { type: 'video/webm' });   
     saveVideoToServer(videoBlob);
    
 });
@@ -80,20 +76,14 @@ function saveVideoToServer(videoBlob) {
     formData.append('mensagem', mensagem);
 
     // Chama a função para fazer o upload do vídeo
-    uploadFile(formData);
+    uploadFile(formData, videoBlob);
 }
 
-async function uploadFile(formData) {
-debugger
-   // const accessToken = gapi.auth.getToken()?.access_token;
-//    if (!accessToken) {
-//         await handleAuthClick();
-//     }
-    debugger
-   
+async function uploadFile(formData, videoBlob) {
+    debugger  
         console.log(accessToken)
     // ID da pasta no Google Drive
-    const folderId = '1qy2mQ8Hv-faTwQq5SxjMki9AAOstRRjl'; // Substitua pelo ID da sua pasta
+    const folderId = '1qy2mQ8Hv-faTwQq5SxjMki9AAOstRRjl'; //  ID da  pasta
 
     // Metadados do arquivo
     const metadata = {
@@ -121,7 +111,8 @@ debugger
     })
     .catch(error => {
         console.error('Error:', error);
-        alert('Erro ao enviar o vídeo.');
+        console.log(error)
+        alert(`Erro ao enviar o vídeo ${error}`);
     });
 }
 
@@ -133,56 +124,9 @@ stopRecordButton.addEventListener('click', () => {
 });
 
 // Configuração da API do Google Drive
-//const CLIENT_ID = '959398658998-5lie1svvddtm9ktn3do5uvnlpcqqnutf.apps.googleusercontent.com'; --minha
 const CLIENT_ID = '1090299703695-i7hbld4agldb5729p4kpqbu9bjme5p6s.apps.googleusercontent.com'
-//const API_KEY = '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';
 const API_KEY ='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'
 const SCOPES = 'https://www.googleapis.com/auth/drive';
-
-// function initClient() {
-//     debugger
-//     gapi.client.init({
-//         apiKey: API_KEY,
-//         clientId: CLIENT_ID,
-//         scope: SCOPES,
-//         discoveryDocs: ["https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"]
-//     }).then(() => {
-//         debugger
-//         // Listen for sign-in state changes
-//         gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
-        
-//         // Handle the initial sign-in state
-//         updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
-        
-//         document.getElementById('btn-enviar').onclick = handleAuthClick;
-//     }).catch((error) => {
-//         console.error("Erro ao inicializar o cliente Google API:", error);
-//     });
-// }
-// Função de inicialização do cliente GIS
-// function initClient() {
-//     debugger
-//     const client = google.accounts.oauth2.initTokenClient({
-//         client_id: CLIENT_ID, // Substitua com o seu CLIENT_ID
-//         scope: SCOPES, // As permissões que você precisa
-//         prompt: 'consent',
-//         callback: (tokenResponse) => {
-//             debugger
-//             if (tokenResponse && tokenResponse.access_token) {
-//                 accessToken = tokenResponse.access_token;
-//                 console.log("Token de Acesso:", accessToken);
-//                 btnEnviar.style.display = 'block'; // Habilita o botão de upload
-//             } else {
-//                 debugger
-//                 console.error("Falha ao obter o token de acesso.");
-//             }
-//         }
-//     });
-//     document.getElementById('btn-enviar').onclick = () => {
-//         debugger
-//         client.requestAccessToken();
-//     };
-// }
 
 function updateSigninStatus(isSignedIn) {
     if (isSignedIn) {
@@ -194,67 +138,33 @@ function updateSigninStatus(isSignedIn) {
     }
 }
 
-function handleAuthClick() {
-    return new Promise((resolve, reject) => {
-        const client = window.google.accounts.oauth2.initTokenClient({
-            client_id: CLIENT_ID,
-            scope: SCOPES,
-            callback: (tokenResponse) => {
-                if (tokenResponse && tokenResponse.access_token) {
-                    debugger
-                    accessToken = tokenResponse.access_token;
-                    console.log("Token de Acesso:", accessToken);
-                    resolve(accessToken);
-                } else {
-                    debugger
-                    reject(new Error("Falha ao obter o token de acesso."));
-                }
-            }
-        });
-        client.requestAccessToken();
-    });
+function initializeAuthentication() {
+    debugger;
+    const storedAccessToken = localStorage.getItem('googleAccessToken');
+    
+    if (!storedAccessToken) {
+        handleAuthorizationCode()
+        redirectToGoogleAuth();
+    } else {
+        
+        accessToken = storedAccessToken;
+        console.log("Usando access token armazenado:", accessToken);
+        // Aqui você pode continuar com suas operações usando o token existente
+    }
 }
 
-function handleCredentialResponse(response) {
-    debugger
-    const token = response.credential; // O token JWT retornado
-    console.log("Token de ID:", token);
-    fetch('https://oauth2.googleapis.com/token', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: new URLSearchParams({
-            'client_id': '1090299703695-i7hbld4agldb5729p4kpqbu9bjme5p6s.apps.googleusercontent.com',
-            'client_secret': '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',
-            'code': token, // ou o código de autorização
-            'grant_type': 'authorization_code',
-            'redirect_uri': 'http://127.0.0.1:5500/Index.html',
-        }),
-    })
-    .then(response => response.json())   
-    .then(data => {
-        debugger
-        const accessToken = data.access_token; // O Access Token
-        console.log("Access Token:", accessToken);
-    
-        // Agora você pode usar o Access Token para enviar o vídeo
-        // Exemplo:
-        // uploadVideo(accessToken);
-    })
-    .catch(error => {
-        console.error("Erro ao obter Access Token:", error);
-    });
-    }
-    
+
 // Passo 1: Redirecionar para o Google para obter autorização
 function redirectToGoogleAuth() {
+    debugger
     const clientId = '1090299703695-i7hbld4agldb5729p4kpqbu9bjme5p6s.apps.googleusercontent.com';
     const redirectUri = 'http://127.0.0.1:5500/Index.html';
     const scope = 'https://www.googleapis.com/auth/drive'; // Escopo desejado
 
     const authUrl = `https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scope}`;
+
     window.location.href = authUrl; // Redireciona o usuário para o Google
+   
 }
 
 // Passo 2: Capturar o código após redirecionamento
@@ -264,6 +174,7 @@ function handleAuthorizationCode() {
     const code = urlParams.get('code'); // Captura o código
 
     if (code) {
+        window.history.replaceState({}, document.title, window.location.pathname); //
         exchangeCodeForToken(code); // Chama a função para trocar o código por um token
     }
 }
@@ -294,11 +205,13 @@ function exchangeCodeForToken(code) {
         accessToken =  data.access_token;        
         // Aqui você pode usar o Access Token para enviar o vídeo
         // uploadVideo(accessToken);
+        localStorage.setItem('googleAccessToken', accessToken);
     })
     .catch(error => {
         console.error("Erro ao obter Access Token:", error);
     });
 }
 
-// Chame redirectToGoogleAuth para iniciar o fluxo
-// redirectToGoogleAuth();
+document.addEventListener('DOMContentLoaded', () => {
+    initializeAuthentication();
+});

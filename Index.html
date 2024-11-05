@@ -32,7 +32,7 @@
                     <img src="Assets/logopopipe.png" class="logopopipe-img" alt="logopopipe" />
                     <img src="Assets/SELOCAMPANHA.png" class="seloCampanha" alt="selocampanha" />
                     <video controls class="video-player">
-                        <source src="videos/exemplo.mp4" type="video/mp4" />
+                        <source src="Assets/POPIPE-VIDEOCOMPLETO05.mp4" type="video/mp4" />
                         Seu navegador não suporta o elemento de vídeo.
                     </video>
                     <h1 class="h1Popipe">A Popipe existe desde quando era só mato!</h1>
@@ -114,61 +114,11 @@
                 <!-- Conteúdo principal aqui -->
             </main>
         </div>
-        <div id="g_id_onload" data-client_id="1090299703695-i7hbld4agldb5729p4kpqbu9bjme5p6s.apps.googleusercontent.com" data-callback="handleCredentialResponse"></div>
-        <div class="g_id_signin" data-type="standard"></div>
+
         
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
         <script src="https://accounts.google.com/gsi/client" async defer></script>
-        <script>
-        function handleCredentialResponse(response) {
-            debugger
-            const idToken = response.credential; // O ID Token retornado
-
-// Trocar o ID Token por um Access Token
-fetch('https://oauth2.googleapis.com/token', {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-    },
-    body: new URLSearchParams({
-        'client_id': '1090299703695-i7hbld4agldb5729p4kpqbu9bjme5p6s.apps.googleusercontent.com',
-        'client_secret': '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',
-        'code': idToken, // ou o código de autorização
-        'grant_type': 'authorization_code',
-        'redirect_uri': 'http://127.0.0.1:5500/Index.html',
-    }),
-})
-.then(response => response.json())
-.then(data => {
-    const accessToken = data.access_token; // O Access Token
-    console.log("Access Token:", accessToken);
-
-    // Agora você pode usar o Access Token para enviar o vídeo
-    // Exemplo:
-    // uploadVideo(accessToken);
-})
-.catch(error => {
-    console.error("Erro ao obter Access Token:", error);
-});
-}
-    </script>
-
-
-
-        <!-- <script type="text/javascript"
-        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
-        </script>
-        <script type="text/javascript">
-            (function(){
-                 emailjs.init({
-                    publicKey: "E5_Df9sER2k4ZrHFG",
-            });
-        })();
-        </script> -->
-
-
-
         <script src="script.js"></script>
     </div>
 </body>
