@@ -4,7 +4,9 @@ html, body {
     width: 100%;
     overflow-x: hidden; /* Impede a barra de rolagem horizontal */
   }
-  
+  .seloCampanha{
+    margin-bottom: 20px;
+  }
   
   /* Fundo verde para toda a página */
   .green-background {
@@ -87,7 +89,7 @@ html, body {
   }
   .section2Text{
     text-align: center;
-    font-family: cursive;
+    font-family: 'News706 BT Bold', sans-serif;
   }
   .text-center{
     font-size: -webkit-xxx-large; 
